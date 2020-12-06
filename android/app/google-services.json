@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1004127178360",
+    "project_id": "momants-a5aa0",
+    "storage_bucket": "momants-a5aa0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1004127178360:android:4e61a913fde9179555678d",
+        "android_client_info": {
+          "package_name": "com.kattanSoftware.momants"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1004127178360-5vlrh6s2rcps3bn8m8rpjb0skv4p5pq7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kattanSoftware.momants",
+            "certificate_hash": "696acade21c0b47c2d152257c33cd25782a5dccc"
+          }
+        },
+        {
+          "client_id": "1004127178360-m7n3h2ii16p65021pplv5frg3bkhoh39.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7UluhyetKY21SR12aGFTtZJiia3D-ZKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1004127178360-m7n3h2ii16p65021pplv5frg3bkhoh39.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
