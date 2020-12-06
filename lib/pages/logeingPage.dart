@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momants/service/authentication.dart';
+import 'package:momants/service/dialogBox.dart';
 
 class LogingPage extends StatefulWidget {
 //this argment from mapping page came for control in Auth
@@ -14,6 +15,8 @@ class LogingPage extends StatefulWidget {
 enum FormType { login, register }
 
 class _LogingPageState extends State<LogingPage> {
+  // this opject for dailoho box
+  DialogBox dialogBox = DialogBox();
   final _globalKey = GlobalKey<ScaffoldState>();
   //this for textforfail
   final formKey = GlobalKey<FormState>();
@@ -63,7 +66,9 @@ class _LogingPageState extends State<LogingPage> {
         }
         widget.onSignedIn();
       } catch (e) {
-        print('Error'+e.toString());
+        dialogBox.info(
+            context, 'Error : ', 'some thing went wrong =' + e.toString());
+        print('Error' + e.toString());
       }
     }
   }
@@ -71,7 +76,6 @@ class _LogingPageState extends State<LogingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _globalKey,
       appBar: AppBar(
         title: Text('Moments'),
       ),
