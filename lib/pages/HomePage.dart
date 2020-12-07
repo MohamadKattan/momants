@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:momants/pages/uploadImagePage.dart';
 import 'package:momants/service/authentication.dart';
 
 class HomePage extends StatefulWidget {
@@ -37,19 +38,23 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.white,
                     size: 40.0,
                   ),
-                  onPressed: null),
+                  onPressed: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return UploadImagePage();
+                    }));
+                  }),
             ],
           ),
         ),
       ),
     );
   }
-  void _logOutUser()async{
+
+  void _logOutUser() async {
     try {
       await widget.auth.SignOut();
       widget.onSignedOut();
-    }catch(e){
-
-    }
+    } catch (e) {}
   }
 }
