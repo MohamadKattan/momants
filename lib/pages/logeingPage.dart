@@ -151,6 +151,8 @@ class _LogingPageState extends State<LogingPage> {
     if (_formType == FormType.login) {
       return [
         RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(9.0)),
             child: Text(
               'Login',
               style: TextStyle(fontSize: 20.0),
@@ -182,6 +184,8 @@ class _LogingPageState extends State<LogingPage> {
     } else {
       return [
         RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(9.0)),
             child: Text(
               'Create Account',
               style: TextStyle(fontSize: 20.0),

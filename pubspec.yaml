@@ -23,13 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_core: ^0.5.3
+  firebase_core:
   firebase_auth: ^0.18.4
   cupertino_icons: ^1.0.0
-  intl: ^0.16.1
-  image_picker: ^0.6.7+14
-  firebase_database: ^4.4.0
-  firebase_storage: ^4.0.1
+  image_picker:
+  firebase_database:
+  firebase_storage:
 
 
 dev_dependencies:

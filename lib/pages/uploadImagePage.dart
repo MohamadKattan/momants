@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:momants/pages/HomePage.dart';
+import 'package:momants/service/linerProgres.dart';
 
 class UploadImagePage extends StatefulWidget {
   @override
@@ -12,6 +13,9 @@ class UploadImagePage extends StatefulWidget {
 }
 
 class _UploadImagePageState extends State<UploadImagePage> {
+  // for botton share
+  bool uploading = false;
+
   // this is file image after pick
   File sampleImage;
   // for textformfiald
@@ -25,18 +29,42 @@ class _UploadImagePageState extends State<UploadImagePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload Image'),
-        centerTitle: true,
+        title: Text(
+          'Upload Image',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: false,
       ),
       body: Center(
-        child: sampleImage == null ? Text('Select an Image') : enableUpload(),
+        child: sampleImage == null ? noFoundImage() : enableUpload(),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: getImage,
         tooltip: 'Add Image',
-        child: Icon(Icons.add_a_photo),
+        child: Icon(
+          Icons.add_a_photo,
+          color: Colors.white,
+        ),
       ),
     );
+  }
+
+  // this if no image yet
+  noFoundImage() {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+        color: Theme.of(context).accentColor.withOpacity(0.3),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Icon(
+              Icons.add_photo_alternate,
+              color: Colors.grey,
+              size: 200.0,
+            ),
+            Text('Select an Image'),
+          ],
+        ));
   }
 
 //this widget for show Image in page + TextFormDaild
@@ -46,6 +74,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
           key: formkey,
           child: ListView(
             children: [
+              uploading ? linerProgres() : Text(''),
               Image.file(
                 sampleImage,
                 height: 330.0,
@@ -69,7 +98,9 @@ class _UploadImagePageState extends State<UploadImagePage> {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: RaisedButton(
-                  onPressed: UploadStatusImage,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(9.0)),
+                  onPressed:  uploading ? null : () => UploadStatusImage(),
                   elevation: 10.0,
                   textColor: Colors.white,
                   color: Colors.amber,
@@ -91,7 +122,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
     });
   }
 
-//  this method for save Image in firebase
+//  this method for save info TextFormFaild
   bool validateAndSave() {
     final form = formkey.currentState;
     if (form.validate()) {
@@ -102,8 +133,11 @@ class _UploadImagePageState extends State<UploadImagePage> {
     }
   }
 
-//this method for upload Image to storage
+//this method for upload Image to storage+datbase
   void UploadStatusImage() async {
+    setState(() {
+      uploading = true;
+    });
     if (validateAndSave()) {
       final StorageReference postImageRef =
           FirebaseStorage.instance.ref().child('postImage');
@@ -115,9 +149,13 @@ class _UploadImagePageState extends State<UploadImagePage> {
       var imageUrl = await (await task.onComplete).ref.getDownloadURL();
       url = imageUrl.toString();
       print('imageUr=' + url);
-      goToHomePage();
+
       saveToDatbase(url);
     }
+    setState(() {
+      uploading = true;
+    });
+    goToHomePage();
   }
 
 //this method for save data in database
