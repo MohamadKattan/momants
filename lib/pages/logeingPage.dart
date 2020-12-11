@@ -103,7 +103,7 @@ class _LogingPageState extends State<LogingPage> {
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 110,
-        child: Image.asset('images/log1.jpg'),
+        child: Image.asset('images/log1.png'),
       ),
     );
   }
