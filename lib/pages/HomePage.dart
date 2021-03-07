@@ -43,7 +43,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Moments',style: TextStyle(color: Colors.white),)),
+      appBar: AppBar(automaticallyImplyLeading: false,
+          title: Text('Moments',style: TextStyle(color: Colors.white),)),
       body: Container(
           child: postsList.length == 0
               ? noFoundImage()
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               IconButton(
                   icon: Icon(
-                    Icons.local_car_wash_outlined,
+                    Icons.cancel_outlined,
                     color: Colors.white,
                     size: 40.0,
                   ),

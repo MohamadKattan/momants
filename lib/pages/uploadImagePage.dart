@@ -18,6 +18,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
 
   // this is file image after pick
   File sampleImage;
+  final picker = ImagePicker();
   // for textformfiald
   final formkey = GlobalKey<FormState>();
   // for on saved textformfiald
@@ -39,7 +40,9 @@ class _UploadImagePageState extends State<UploadImagePage> {
         child: sampleImage == null ? noFoundImage() : enableUpload(),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: getImage,
+        onPressed: () {
+          getImage();
+        },
         tooltip: 'Add Image',
         child: Icon(
           Icons.add_a_photo,
@@ -52,7 +55,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
   // this if no image yet
   noFoundImage() {
     return Container(
-      width: MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         color: Theme.of(context).accentColor.withOpacity(0.3),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +103,7 @@ class _UploadImagePageState extends State<UploadImagePage> {
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(9.0)),
-                  onPressed:  uploading ? null : () => UploadStatusImage(),
+                  onPressed: uploading ? null : () => UploadStatusImage(),
                   elevation: 10.0,
                   textColor: Colors.white,
                   color: Colors.amber,
@@ -116,9 +119,13 @@ class _UploadImagePageState extends State<UploadImagePage> {
 
 //tjis method for pick Image from camera or gallery
   Future getImage() async {
-    var tempImage = await ImagePicker.pickImage(source: ImageSource.gallery);
+    var tempImage = await picker.getImage(source: ImageSource.gallery);
     setState(() {
-      sampleImage = tempImage;
+      if (tempImage != null) {
+        sampleImage = File(tempImage.path);
+      } else {
+        print('No image selected.');
+      }
     });
   }
 
